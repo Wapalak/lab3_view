@@ -4,12 +4,17 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 
 public class MainActivityNew extends AppCompatActivity {
@@ -18,17 +23,23 @@ public class MainActivityNew extends AppCompatActivity {
     MyDatabaseHelper myDB;
     ArrayList<String> student_id, student_name, student_surname;
     CustomAdapterNew customAdapterNew;
+    FloatingActionButton add_button;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_new);
+        add_button = findViewById(R.id.add_button);
 
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true); // Добавлено для отображения кнопки в ActionBar
-        }
+        add_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivityNew.this, AddActivity.class);
+                startActivity(intent);
+            }
+        });
 
         recyclerViewNew = findViewById(R.id.recyclerViewNew);
         myDB = new MyDatabaseHelper(MainActivityNew.this);
@@ -56,6 +67,7 @@ public class MainActivityNew extends AppCompatActivity {
             }
         }
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -67,5 +79,4 @@ public class MainActivityNew extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 }

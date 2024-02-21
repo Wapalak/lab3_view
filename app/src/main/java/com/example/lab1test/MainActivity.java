@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton add_button;
 
     MyDatabaseHelper myDB;
-    ArrayList<String> student_id, student_name, student_surname, student_phone, student_blood_group, student_birth_date;
+    ArrayList<String> student_id, student_name, student_surname, student_phone, student_uin, student_address;
     CustomAdapter customAdapter;
 
     @Override
@@ -44,12 +44,12 @@ public class MainActivity extends AppCompatActivity {
         student_name = new ArrayList<>();
         student_surname = new ArrayList<>();
         student_phone = new ArrayList<>();
-        student_blood_group = new ArrayList<>();
-        student_birth_date = new ArrayList<>();
+        student_uin = new ArrayList<>(); // Измененное поле
+        student_address = new ArrayList<>(); // Измененное поле
 
         storeDataInArrays();
         customAdapter = new CustomAdapter(MainActivity.this, this, student_id,
-                student_name, student_surname, student_phone, student_blood_group, student_birth_date);
+                student_name, student_surname, student_phone, student_uin, student_address);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
 
@@ -72,10 +72,10 @@ public class MainActivity extends AppCompatActivity {
                 student_id.add(cursor.getString(0));
                 student_name.add(cursor.getString(1));
                 student_surname.add(cursor.getString(2));
-                // Добавлены новые поля в массивы
+                // Использованы новые поля базы данных
                 student_phone.add(cursor.getString(3));
-                student_blood_group.add(cursor.getString(4));
-                student_birth_date.add(cursor.getString(5));
+                student_uin.add(cursor.getString(4));
+                student_address.add(cursor.getString(5));
             }
         }
     }

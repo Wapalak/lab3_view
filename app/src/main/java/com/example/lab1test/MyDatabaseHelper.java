@@ -18,9 +18,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_NAME = "name";
     private static final String COLUMN_SURNAME = "surname";
-    private static final String NEW_COLUMN_PHONE = "phone";
-    private static final String NEW_COLUMN_BLOOD_GROUP = "blood";
-    private static final String NEW_COLUMN_BIRTH_DATE = "bDate";
+    private static final String COLUMN_PHONE = "phone";
+    private static final String COLUMN_UIN = "uin"; // Измененное поле
+    private static final String COLUMN_ADDRESS = "address"; // Измененное поле
 
     MyDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -33,9 +33,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_NAME + " TEXT, " +
                 COLUMN_SURNAME + " TEXT, " +
-                NEW_COLUMN_PHONE + " TEXT, " +
-                NEW_COLUMN_BLOOD_GROUP + " TEXT, " +
-                NEW_COLUMN_BIRTH_DATE + " TEXT);";
+                COLUMN_PHONE + " TEXT, " +
+                COLUMN_UIN + " TEXT, " +
+                COLUMN_ADDRESS + " TEXT);";
         db.execSQL(query);
     }
 
@@ -45,15 +45,15 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    void addStudent(String name, String surname, String phone, String bloodGroup, String birthDate) {
+    void addStudent(String name, String surname, String phone, String uin, String address) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put(COLUMN_NAME, name);
         cv.put(COLUMN_SURNAME, surname);
-        cv.put(NEW_COLUMN_PHONE, phone);
-        cv.put(NEW_COLUMN_BLOOD_GROUP, bloodGroup);
-        cv.put(NEW_COLUMN_BIRTH_DATE, birthDate);
+        cv.put(COLUMN_PHONE, phone);
+        cv.put(COLUMN_UIN, uin);
+        cv.put(COLUMN_ADDRESS, address);
 
         long result = db.insert(TABLE_NAME, null, cv);
         if (result == -1) {
@@ -69,14 +69,14 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         return db.rawQuery(query, null);
     }
 
-    void updateData(String row_id, String name, String surname, String phone, String bloodGroup, String birthDate) {
+    void updateData(String row_id, String name, String surname, String phone, String uin, String address) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_NAME, name);
         cv.put(COLUMN_SURNAME, surname);
-        cv.put(NEW_COLUMN_PHONE, phone);
-        cv.put(NEW_COLUMN_BLOOD_GROUP, bloodGroup);
-        cv.put(NEW_COLUMN_BIRTH_DATE, birthDate);
+        cv.put(COLUMN_PHONE, phone);
+        cv.put(COLUMN_UIN, uin);
+        cv.put(COLUMN_ADDRESS, address);
 
         long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
         if (result == -1) {
@@ -87,7 +87,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             Toast.makeText(context, "Successfully updated!", Toast.LENGTH_SHORT).show();
         }
     }
-
 
     void deleteOneRow(String row_id) {
         SQLiteDatabase db = this.getWritableDatabase();

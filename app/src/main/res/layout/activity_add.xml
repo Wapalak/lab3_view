@@ -12,7 +12,7 @@
         android:id="@+id/name_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="User's Name"
         android:minHeight="48dp"
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="User's Phone: +7(XXX)XXX-XX-XX"
+        android:hint="User's Phone"
         android:inputType="phone"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,12 +47,12 @@
         app:layout_constraintTop_toBottomOf="@+id/surname_input" />
 
     <EditText
-        android:id="@+id/blood_group_input"
+        android:id="@+id/uin_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="User's Blood Group from 1 to 4 (+|-)"
+        android:hint="User's UIN"
         android:inputType="text"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,36 +60,52 @@
         app:layout_constraintTop_toBottomOf="@+id/phone_input" />
 
     <EditText
-        android:id="@+id/birth_date_input"
+        android:id="@+id/address_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="User's Birth Date in form: dd.mm.year"
-        android:inputType="date"
+        android:hint="User's Address"
+        android:inputType="text"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/blood_group_input" />
+        app:layout_constraintTop_toBottomOf="@+id/uin_input" />
 
     <Button
         android:id="@+id/add_button"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="70dp"
-        android:layout_marginTop="40dp"
-        android:text="Add"
+        android:layout_marginTop="24dp"
+        android:text="Add User"
+        android:background="#4CAF50"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/birth_date_input" />
+        app:layout_constraintTop_toBottomOf="@+id/address_input" />
 
     <Button
         android:id="@+id/see_students_button"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_marginTop="16dp"
-        android:text="See Students"
+        android:text="View Students"
+        android:background="#FFC107"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_button" />
+
+    <Button
+        android:id="@+id/manage_panel_button2"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="16dp"
+        android:text="Manage Panel"
+        android:background="#F44336"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/see_students_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

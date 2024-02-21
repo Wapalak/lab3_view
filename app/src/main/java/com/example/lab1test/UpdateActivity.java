@@ -15,10 +15,10 @@ import android.widget.Toast;
 
 public class UpdateActivity extends AppCompatActivity {
 
-    EditText name_input, surname_input, phone_input, blood_group_input, birth_date_input;
+    EditText name_input, surname_input, phone_input, uin_input, address_input;
     Button update_button, delete_button;
 
-    String id, name, surname, phone, bloodGroup, birthDate;
+    String id, name, surname, phone, uin, address;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -29,17 +29,12 @@ public class UpdateActivity extends AppCompatActivity {
         name_input = findViewById(R.id.name_input2);
         surname_input = findViewById(R.id.surname_input2);
         phone_input = findViewById(R.id.phone_input2);
-        blood_group_input = findViewById(R.id.blood_group_input2);
-        birth_date_input = findViewById(R.id.birth_date_input2);
+        uin_input = findViewById(R.id.uin_input2);
+        address_input = findViewById(R.id.address_input2);
         update_button = findViewById(R.id.update_button);
         delete_button = findViewById(R.id.delete_button);
 
         getAndSetIntentData();
-
-        ActionBar ab = getSupportActionBar();
-        if (ab != null) {
-            ab.setTitle(name);
-        }
 
         update_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,9 +43,9 @@ public class UpdateActivity extends AppCompatActivity {
                 name = name_input.getText().toString().trim();
                 surname = surname_input.getText().toString().trim();
                 phone = phone_input.getText().toString().trim();
-                bloodGroup = blood_group_input.getText().toString().trim();
-                birthDate = birth_date_input.getText().toString().trim();
-                myDB.updateData(id, name, surname, phone, bloodGroup, birthDate);
+                uin = uin_input.getText().toString().trim(); // Измененное поле
+                address = address_input.getText().toString().trim(); // Измененное поле
+                myDB.updateData(id, name, surname, phone, uin, address);
             }
         });
 
@@ -65,26 +60,26 @@ public class UpdateActivity extends AppCompatActivity {
     void getAndSetIntentData() {
         if (getIntent().hasExtra("id") && getIntent().hasExtra("name") &&
                 getIntent().hasExtra("surname") && getIntent().hasExtra("phone") &&
-                getIntent().hasExtra("blood") && getIntent().hasExtra("bDate")) {
+                getIntent().hasExtra("uin") && getIntent().hasExtra("address")) {
             id = getIntent().getStringExtra("id");
             name = getIntent().getStringExtra("name");
             surname = getIntent().getStringExtra("surname");
             phone = getIntent().getStringExtra("phone");
-            bloodGroup = getIntent().getStringExtra("blood");
-            birthDate = getIntent().getStringExtra("bDate");
+            uin = getIntent().getStringExtra("uin");
+            address = getIntent().getStringExtra("address");
 
             Log.d("UpdateActivity", "id: " + id);
             Log.d("UpdateActivity", "name: " + name);
             Log.d("UpdateActivity", "surname: " + surname);
             Log.d("UpdateActivity", "phone: " + phone);
-            Log.d("UpdateActivity", "bloodGroup: " + bloodGroup);
-            Log.d("UpdateActivity", "birthDate: " + birthDate);
+            Log.d("UpdateActivity", "uin: " + uin);
+            Log.d("UpdateActivity", "address: " + address);
 
             name_input.setText(name);
             surname_input.setText(surname);
             phone_input.setText(phone);
-            blood_group_input.setText(bloodGroup);
-            birth_date_input.setText(birthDate);
+            uin_input.setText(uin);
+            address_input.setText(address);
         } else {
             Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
         }
