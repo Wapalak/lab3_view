@@ -23,7 +23,7 @@ import java.io.IOException;
 public class AddActivity extends AppCompatActivity {
 
     EditText name_input, surname_input, phone_input, blood_group_input, birth_date_input;
-    Button add_button;
+    Button add_button, see_students_button; // Добавленная кнопка
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -68,6 +68,7 @@ public class AddActivity extends AppCompatActivity {
         blood_group_input = findViewById(R.id.blood_group_input);
         birth_date_input = findViewById(R.id.birth_date_input);
         add_button = findViewById(R.id.add_button);
+        see_students_button = findViewById(R.id.see_students_button); // Инициализация кнопки
 
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,6 +117,41 @@ public class AddActivity extends AppCompatActivity {
                 builder.show();
             }
         });
+        see_students_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Переход на активити для просмотра студентов
+                showConfirmationDialog();
+            }
+        });
+
+    }
+
+    private void showConfirmationDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(AddActivity.this);
+        builder.setTitle("Confirmation");
+        builder.setMessage("Are you sure you want to see student information? You will be able" +
+                "to see only ID, names and surnames of students without possibility " +
+                "to change or delete them");
+
+        builder.setPositiveButton("Agree", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Переход на активити для просмотра студентов
+                Intent intent = new Intent(AddActivity.this, MainActivityNew.class);
+                startActivity(intent);
+            }
+        });
+
+        builder.setNegativeButton("Reject", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Отказано, остаемся на текущей странице
+                dialog.dismiss();
+            }
+        });
+
+        builder.show();
     }
 }
 
